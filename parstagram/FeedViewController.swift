@@ -116,6 +116,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let post = posts[indexPath.section]
         let comments = (post["comments"] as? [PFObject]) ?? []
+        print("comments are \(comments)")
         
         if indexPath.row == 0 {
         
@@ -139,7 +140,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
             
             let comment = comments[indexPath.row - 1]
-            cell.nameLabel.text = comment["text"] as? String
+            cell.commentLabel.text = comment["text"] as? String
             
             let user = comment["author"] as! PFUser
             cell.nameLabel.text = user.username
@@ -163,21 +164,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             commentBar.inputTextView.becomeFirstResponder()
             selectedPost = post
         }
-        
-//        comment["text"] = "Random Comment"
-//        comment["post"] = post
-//        comment["author"] = PFUser.current()!
-//
-//        post.add(comment, forKey: "comments")
-//        post.saveInBackground{ (success,error) in
-//            if success {
-//                print("Comment Saved")
-//            } else{
-//                print("Error saving comment")
-//            }
-//
-//        }
-        
     }
 
     /*
